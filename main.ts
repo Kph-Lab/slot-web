@@ -50,7 +50,7 @@ const sketch = (p: p5) => {
 
     // top
     count -= 12;
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 11; i++) {
       if (count == i) {
         p.fill(yellow);
       } else {
@@ -60,14 +60,14 @@ const sketch = (p: p5) => {
     }
 
     // right
-    count -= 10;
+    count -= 11;
     for (let i = 0; i < 12; i++) {
       if (count == i) {
         p.fill(yellow);
       } else {
         p.fill(255, 255, 255);
       }
-      p.circle(40+75*9, 40+75+75*i, 40);
+      p.circle(40+75*10, 40+75+75*i, 40);
     }
   };
 
