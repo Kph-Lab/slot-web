@@ -18,12 +18,13 @@ const sketch = (p: p5) => {
   let v = 10;
   let a = 0;
   p.setup = () => {
+    // iPad width: 834 height: 1112
     p.createCanvas(p.windowWidth, p.windowHeight);
     button = p.createSlider(0, 100, x, 1);
   };
 
   p.draw = () => {
-    p.background(220);
+    p.background(0);
     for (let i = 0; i < 6; i++) {
       imgsY[i] += v;
       if (imgsY[i] > 400) {
