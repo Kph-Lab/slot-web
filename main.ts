@@ -8,6 +8,10 @@ const sketch = (p: p5) => {
   let loadedImages: p5.Image[] = [];
   const imgW = 100;
   const imgH = 100;
+  const yellow = p.color("#f2d15b");
+  const red = p.color("#b30401");
+  const white = p.color("#ffffff");
+  const green = p.color("#036c0d");
   for (let img in Imgs) {
     loadedImages.push(p.loadImage(Imgs[img]));
   }
@@ -24,7 +28,7 @@ const sketch = (p: p5) => {
   };
 
   p.draw = () => {
-    p.background(0);
+    drawBackground();
     for (let i = 0; i < 6; i++) {
       imgsY[i] += v;
       if (imgsY[i] > 400) {
@@ -35,9 +39,24 @@ const sketch = (p: p5) => {
     drawCircles();
   };
 
+  const drawBackground = () => {
+    p.background(0);
+    p.fill(red);
+    p.rect(80, 80, p.windowWidth-160, p.windowHeight-80);
+    p.fill(green);
+    p.stroke(0);
+    p.strokeWeight(5);
+    p.arc(p.windowWidth/ 2, 500, 500, 500, p.PI, 0);
+    p.noStroke();
+    p.rect((p.windowWidth / 2)- 250, 500, 500, p.windowHeight- 500);
+    p.stroke(0);
+    p.strokeWeight(5);
+    p.line((p.windowWidth / 2) - 250, 500, (p.windowWidth / 2) - 250, p.windowHeight);
+    p.line((p.windowWidth / 2) + 250, 500, (p.windowWidth / 2) + 250, p.windowHeight);
+  }
+
   const drawCircles = () => {
     p.noStroke();
-    let yellow = p.color("#f2d15b");
     let count = Math.round(p.frameCount / 9) % 34;
     // left
     for (let i = 0; i < 12; i++) {
