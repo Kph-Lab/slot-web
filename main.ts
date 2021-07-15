@@ -29,13 +29,7 @@ const sketch = (p: p5) => {
 
   p.draw = () => {
     drawBackground();
-    for (let i = 0; i < 6; i++) {
-      imgsY[i] += v;
-      if (imgsY[i] > 400) {
-        imgsY[i] -= 100*6;
-      }
-      p.image(loadedImages[i], 200, imgsY[i], imgW, imgH);
-    }
+    drawDrum();
     drawCircles();
   };
 
@@ -90,6 +84,16 @@ const sketch = (p: p5) => {
       p.circle(40+75*10, 40+75+75*i, 40);
     }
   };
+
+  const drawDrum = () => {
+    for (let i = 0; i < 6; i++) {
+      imgsY[i] += v;
+      if (imgsY[i] > 400) {
+        imgsY[i] -= 100*6;
+      }
+      p.image(loadedImages[i], 200, imgsY[i], imgW, imgH);
+    }
+  }
 
   const toNum = (arg: any, d: number):number => {
     if ('number' === typeof arg) {
