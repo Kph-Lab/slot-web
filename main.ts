@@ -29,24 +29,31 @@ const sketch = (p: p5) => {
 
   p.draw = () => {
     drawBackground();
-    drawDrum();
+    // drawDrum();
     drawCircles();
   };
 
   const drawBackground = () => {
+    const redRectMergin = 80;
+    const radius = 250;
+    const diameter = radius * 2;
+    const centerX = p.windowWidth / 2;
+    const greenLeftEdge = centerX - radius;
+    const greenRightEdge = centerX + radius;
+    const greenBorderY = 500;
     p.background(0);
     p.fill(red);
-    p.rect(80, 80, p.windowWidth-160, p.windowHeight-80);
+    p.rect(redRectMergin, redRectMergin, p.windowWidth-(redRectMergin*2), p.windowHeight-redRectMergin);
     p.fill(green);
     p.stroke(0);
     p.strokeWeight(5);
-    p.arc(p.windowWidth/ 2, 500, 500, 500, p.PI, 0);
+    p.arc(centerX, greenBorderY, diameter, diameter, p.PI, 0);
     p.noStroke();
-    p.rect((p.windowWidth / 2)- 250, 500, 500, p.windowHeight- 500);
+    p.rect(greenLeftEdge, greenBorderY, diameter, p.windowHeight- diameter);
     p.stroke(0);
     p.strokeWeight(5);
-    p.line((p.windowWidth / 2) - 250, 500, (p.windowWidth / 2) - 250, p.windowHeight);
-    p.line((p.windowWidth / 2) + 250, 500, (p.windowWidth / 2) + 250, p.windowHeight);
+    p.line(greenLeftEdge, greenBorderY, greenLeftEdge, p.windowHeight);
+    p.line(greenRightEdge, greenBorderY, greenRightEdge, p.windowHeight);
   }
 
   const drawCircles = () => {
