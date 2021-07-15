@@ -41,17 +41,18 @@ const sketch = (p: p5) => {
     const greenLeftEdge = centerX - radius;
     const greenRightEdge = centerX + radius;
     const greenBorderY = 500;
+    const strokeWeight = 5;
     p.background(0);
     p.fill(red);
     p.rect(redRectMergin, redRectMergin, p.windowWidth-(redRectMergin*2), p.windowHeight-redRectMergin);
     p.fill(green);
     p.stroke(0);
-    p.strokeWeight(5);
+    p.strokeWeight(strokeWeight);
     p.arc(centerX, greenBorderY, diameter, diameter, p.PI, 0);
     p.noStroke();
-    p.rect(greenLeftEdge, greenBorderY, diameter, p.windowHeight- diameter);
+    p.rect(greenLeftEdge, greenBorderY, diameter, p.windowHeight- greenBorderY);
     p.stroke(0);
-    p.strokeWeight(5);
+    p.strokeWeight(strokeWeight);
     p.line(greenLeftEdge, greenBorderY, greenLeftEdge, p.windowHeight);
     p.line(greenRightEdge, greenBorderY, greenRightEdge, p.windowHeight);
   }
