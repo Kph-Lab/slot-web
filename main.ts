@@ -45,7 +45,7 @@ const sketch = (p: p5) => {
   p.draw = () => {
     p.background(yellow);
     bgLayer.background(0);
-    drawInputs();
+    // drawInputs();
     drawDrum();
     drawBackground();
     drawCircles();
