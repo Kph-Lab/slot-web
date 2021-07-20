@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "parcel index.html --open",
-    "build": "parcel build index.html",
+    "build": "parcel build index.html --public-url .",
     "buildForCI": "parcel build index.html --public-url ."
   }
 }
