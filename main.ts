@@ -5,6 +5,7 @@ import Imgs from "./assets/images/sample/*.png";
 const sketch = (p: p5) => {
   let x = 50;
   let button: p5.Element;
+  let inp: p5.Element;
   let loadedImages: p5.Image[] = [];
   let bgLayer: p5.Graphics;
   const imgW = 100;
@@ -36,14 +37,19 @@ const sketch = (p: p5) => {
     p.frameRate(60);
     // iPad width: 834 height: 1112
     p.createCanvas(p.windowWidth, p.windowHeight);
-    p.background(yellow);
+    p.background(white);
     bgLayer = p.createGraphics(p.windowWidth, p.windowHeight);
 
     // button = p.createSlider(0, 100, x, 1);
+    // button.position(0,0);
+    inp = p.createInput();
+    inp.position(greenLeftEdge + 20, p.windowHeight - 250);
+    inp.size(150);
+    inp.style('font-size', '50px');
   };
 
   p.draw = () => {
-    p.background(yellow);
+    p.background(white);
     bgLayer.background(0);
     // drawInputs();
     drawDrum();
@@ -52,6 +58,7 @@ const sketch = (p: p5) => {
     bgLayer.textSize(20);
     bgLayer.text(p.frameRate(), 100, 100);
     p.image(bgLayer, 0, 0);
+    drawResultText();
   };
 
   const drawBackground = () => {
@@ -123,6 +130,12 @@ const sketch = (p: p5) => {
       p.image(loadedImages[i], greenLeftEdge + 190, imgsY[i], imgW, imgH);
       p.image(loadedImages[i], greenLeftEdge + 330, imgsY[i], imgW, imgH);
     }
+  }
+
+  const drawResultText = () => {
+    p.textSize(50);
+    p.text("枚×100倍", greenLeftEdge + 200, p.windowHeight - 200);
+    p.text("=10000枚", greenLeftEdge + 200, p.windowHeight - 100);
   }
 
   const toNum = (arg: any, d: number):number => {
