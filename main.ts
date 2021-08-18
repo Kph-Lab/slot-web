@@ -3,10 +3,7 @@ import p5 from "p5";
 import Imgs from "./assets/images/*.png";
 
 const sketch = (p: p5) => {
-  let x = 50;
-  let button: p5.Element;
   let inp: p5.Element;
-  let loadedImages: p5.Image[] = [];
   let bgLayer: p5.Graphics;
   const imgW = 100;
   const imgH = 141;
