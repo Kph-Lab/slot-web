@@ -9,7 +9,7 @@ const sketch = (p: p5) => {
   let loadedImages: p5.Image[] = [];
   let bgLayer: p5.Graphics;
   const imgW = 100;
-  const imgH = 100;
+  const imgH = 141;
   const yellow = p.color("#f2d15b");
   const red = p.color("#b30401");
   const white = p.color("#ffffff");
