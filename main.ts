@@ -26,6 +26,7 @@ const sketch = (p: p5) => {
   const drum0Imgs: p5.Image[] = []
   const drum1Imgs: p5.Image[] = []
   const drum2Imgs: p5.Image[] = []
+  let imgsY: Array<number> = Array(drum0Str.length);
   let v = 30;
   let a = 0;
   p.setup = () => {
@@ -61,7 +62,6 @@ const sketch = (p: p5) => {
     for (let n of drum2Str) {
       drum2Imgs.push(p.loadImage(Imgs[n]));
     }
-    let imgsY: Array<number> = Array(drum0Str.length);
     for (let i = 0; i < imgsY.length; i++) {
       imgsY[i] = imgH * i;
     }
