@@ -1,6 +1,6 @@
 import p5 from "p5";
 //@ts-ignore
-import Imgs from "./assets/images/sample/*.png";
+import Imgs from "./assets/images/*.png";
 
 const sketch = (p: p5) => {
   let x = 50;
@@ -121,7 +121,7 @@ const sketch = (p: p5) => {
   };
 
   const drawDrum = () => {
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < imgsY.length; i++) {
       imgsY[i] += v;
       if (imgsY[i] > 800) {
         imgsY[i] -= 100*6;
