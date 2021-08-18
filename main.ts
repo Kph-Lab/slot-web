@@ -23,13 +23,24 @@ const sketch = (p: p5) => {
   const greenRightEdge = centerX + radius;
   const greenBorderY = 500;
   const strokeWeight = 5;
-
-  for (let img in Imgs) {
-    loadedImages.push(p.loadImage(Imgs[img]));
+  const drum0Str = ["bell", "cherry", "palm", "flag", "bomb", "ball", "seven", "ball", "bell", "seven", "bomb", "flag", "cherry", "palm", "palm", "seven", "bell", "ball", "cherry", "flag"]
+  const drum1Str = ["cherry", "palm", "palm", "seven", "bell", "ball", "cherry", "flag", "bell", "cherry", "palm", "flag", "bomb", "ball", "seven", "ball", "bell", "seven", "bomb", "flag"]
+  const drum2Str = ["ball", "cherry", "flag", "bell", "cherry", "palm", "flag", "bomb", "ball", "seven", "ball", "bell", "seven", "bomb", "flag", "cherry", "palm", "palm", "seven", "bell"]
+  const drum0Imgs: p5.Image[] = []
+  const drum1Imgs: p5.Image[] = []
+  const drum2Imgs: p5.Image[] = []
+  for (let n of drum0Str) {
+    drum0Imgs.push(p.loadImage(Imgs[n]));
   }
-  let imgsY: Array<number> = Array(loadedImages.length);
+  for (let n of drum1Str) {
+    drum1Imgs.push(p.loadImage(Imgs[n]));
+  }
+  for (let n of drum2Str) {
+    drum2Imgs.push(p.loadImage(Imgs[n]));
+  }
+  let imgsY: Array<number> = Array(drum0Str.length);
   for (let i = 0; i < imgsY.length; i++) {
-    imgsY[i] = 100 * i;
+    imgsY[i] = imgH * i;
   }
   let v = 30;
   let a = 0;
@@ -121,14 +132,18 @@ const sketch = (p: p5) => {
   };
 
   const drawDrum = () => {
+    let skipDraw = false;
     for (let i = 0; i < imgsY.length; i++) {
       imgsY[i] += v;
       if (imgsY[i] > 800) {
-        imgsY[i] -= 100*6;
+        imgsY[i] -= imgH*imgsY.length;
+        skipDraw = true;
       }
-      p.image(loadedImages[i], greenLeftEdge + 50, imgsY[i], imgW, imgH);
-      p.image(loadedImages[i], greenLeftEdge + 190, imgsY[i], imgW, imgH);
-      p.image(loadedImages[i], greenLeftEdge + 330, imgsY[i], imgW, imgH);
+      if (!skipDraw) {
+        p.image(drum0Imgs[i], greenLeftEdge + 50, imgsY[i], imgW, imgH);
+        p.image(drum1Imgs[i], greenLeftEdge + 190, imgsY[i], imgW, imgH);
+        p.image(drum2Imgs[i], greenLeftEdge + 330, imgsY[i], imgW, imgH);
+      }
     }
   }
 
