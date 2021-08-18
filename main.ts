@@ -35,13 +35,7 @@ const sketch = (p: p5) => {
     p.createCanvas(p.windowWidth, p.windowHeight);
     p.background(white);
     bgLayer = p.createGraphics(p.windowWidth, p.windowHeight);
-
-    // button = p.createSlider(0, 100, x, 1);
-    // button.position(0,0);
-    inp = p.createInput();
-    inp.position(greenLeftEdge + 20, p.windowHeight - 250);
-    inp.size(150);
-    inp.style('font-size', '50px');
+    drawInputs();
   };
 
   p.draw = () => {
@@ -92,8 +86,10 @@ const sketch = (p: p5) => {
   }
 
   const drawInputs = () => {
-    let inp = p.createInput();
-    inp.position(0, -300);
+    inp = p.createInput();
+    inp.position(greenLeftEdge + 20, p.windowHeight - 250);
+    inp.size(150);
+    inp.style('font-size', '50px');
   }
 
   const drawCircles = () => {
