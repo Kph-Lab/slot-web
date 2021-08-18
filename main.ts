@@ -26,22 +26,10 @@ const sketch = (p: p5) => {
   const drum0Imgs: p5.Image[] = []
   const drum1Imgs: p5.Image[] = []
   const drum2Imgs: p5.Image[] = []
-  for (let n of drum0Str) {
-    drum0Imgs.push(p.loadImage(Imgs[n]));
-  }
-  for (let n of drum1Str) {
-    drum1Imgs.push(p.loadImage(Imgs[n]));
-  }
-  for (let n of drum2Str) {
-    drum2Imgs.push(p.loadImage(Imgs[n]));
-  }
-  let imgsY: Array<number> = Array(drum0Str.length);
-  for (let i = 0; i < imgsY.length; i++) {
-    imgsY[i] = imgH * i;
-  }
   let v = 30;
   let a = 0;
   p.setup = () => {
+    setupImages();
     p.frameRate(60);
     // iPad width: 834 height: 1112
     p.createCanvas(p.windowWidth, p.windowHeight);
@@ -68,6 +56,22 @@ const sketch = (p: p5) => {
     p.image(bgLayer, 0, 0);
     drawResultText();
   };
+
+  const setupImages = () => {
+    for (let n of drum0Str) {
+      drum0Imgs.push(p.loadImage(Imgs[n]));
+    }
+    for (let n of drum1Str) {
+      drum1Imgs.push(p.loadImage(Imgs[n]));
+    }
+    for (let n of drum2Str) {
+      drum2Imgs.push(p.loadImage(Imgs[n]));
+    }
+    let imgsY: Array<number> = Array(drum0Str.length);
+    for (let i = 0; i < imgsY.length; i++) {
+      imgsY[i] = imgH * i;
+    }
+  }
 
   const drawBackground = () => {
     bgLayer.fill(red);
