@@ -4,6 +4,7 @@ import Imgs from "./assets/images/*.png";
 
 const sketch = (p: p5) => {
   let inp: p5.Element;
+  let stopButtons: p5.Element[] = [];
   let bgLayer: p5.Graphics;
   const imgW = 100;
   const imgH = 141;
@@ -37,6 +38,7 @@ const sketch = (p: p5) => {
     p.background(white);
     bgLayer = p.createGraphics(p.windowWidth, p.windowHeight);
     drawInputs();
+    drawButtons();
   };
 
   p.draw = () => {
@@ -64,6 +66,14 @@ const sketch = (p: p5) => {
     }
     for (let i = 0; i < imgsY.length; i++) {
       imgsY[i] = imgH * i;
+    }
+  }
+
+  const drawButtons = () => {
+    for (let i = 0; i < 3; i++) {
+      stopButtons.push(p.createButton("Stop"))
+      stopButtons[i].position(greenLeftEdge + 50 + (135 * i), 750)
+      stopButtons[i].size(135, 70);
     }
   }
 
