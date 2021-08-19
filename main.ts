@@ -21,15 +21,17 @@ const sketch = (p: p5) => {
   const greenRightEdge = centerX + radius;
   const greenBorderY = 500;
   const strokeWeight = 5;
-  const drum0Str = ["bell", "cherry", "palm", "flag", "bomb", "ball", "seven", "ball", "bell", "seven", "bomb", "flag", "cherry", "palm", "palm", "seven", "bell", "ball", "cherry", "flag"]
-  const drum1Str = ["cherry", "palm", "palm", "seven", "bell", "ball", "cherry", "flag", "bell", "cherry", "palm", "flag", "bomb", "ball", "seven", "ball", "bell", "seven", "bomb", "flag"]
-  const drum2Str = ["ball", "cherry", "flag", "bell", "cherry", "palm", "flag", "bomb", "ball", "seven", "ball", "bell", "seven", "bomb", "flag", "cherry", "palm", "palm", "seven", "bell"]
-  const drum0Imgs: p5.Image[] = []
-  const drum1Imgs: p5.Image[] = []
-  const drum2Imgs: p5.Image[] = []
-  let imgsY: Array<number> = Array(drum0Str.length);
-  let v = 30;
-  let a = 0;
+  const drumsStr: string[][] = [
+    ["bell", "cherry", "palm", "flag", "bomb", "ball", "seven", "ball", "bell", "seven", "bomb", "flag", "cherry", "palm", "palm", "seven", "bell", "ball", "cherry", "flag"],
+    ["cherry", "palm", "palm", "seven", "bell", "ball", "cherry", "flag", "bell", "cherry", "palm", "flag", "bomb", "ball", "seven", "ball", "bell", "seven", "bomb", "flag"],
+    ["ball", "cherry", "flag", "bell", "cherry", "palm", "flag", "bomb", "ball", "seven", "ball", "bell", "seven", "bomb", "flag", "cherry", "palm", "palm", "seven", "bell"]
+  ]
+  const drumImgs: p5.Image[][] = []
+  const drumStopBorderRange = [400+(300/2) - imgH, 400+(300/2)];
+  const currentDrum: number[] = [0, 0, 0];
+  let imgsY: number[][] = new Array(drumsStr[0].length);
+  let v = [30, 30, 30];
+  let a = [0, 0, 0];
   p.setup = () => {
     setupImages();
     p.frameRate(60);
@@ -55,17 +57,19 @@ const sketch = (p: p5) => {
   };
 
   const setupImages = () => {
-    for (let n of drum0Str) {
-      drum0Imgs.push(p.loadImage(Imgs[n]));
-    }
-    for (let n of drum1Str) {
-      drum1Imgs.push(p.loadImage(Imgs[n]));
-    }
-    for (let n of drum2Str) {
-      drum2Imgs.push(p.loadImage(Imgs[n]));
+    console.log("Imgs");
+    console.log(Imgs);
+    for (let i = 0; i < drumsStr[0].length; i++) {
+      drumImgs.push([]);
+      for (let j = 0; j < 3; j++) {
+        drumImgs[i].push(p.loadImage(Imgs[drumsStr[j][i]]));
+        console.log(drumsStr[j][i]);
+      }
     }
     for (let i = 0; i < imgsY.length; i++) {
-      imgsY[i] = imgH * i;
+      for (let j = 0; j < 3; j++) {
+        imgsY[i] = [imgH * i, imgH * i, imgH * i];
+      }
     }
   }
 
@@ -74,6 +78,9 @@ const sketch = (p: p5) => {
       stopButtons.push(p.createButton("Stop"))
       stopButtons[i].position(greenLeftEdge + 50 + (135 * i), 750)
       stopButtons[i].size(135, 70);
+      stopButtons[i].mousePressed(function() {
+        stopDrum(i)
+      });
     }
   }
 
@@ -141,15 +148,18 @@ const sketch = (p: p5) => {
   const drawDrum = () => {
     let skipDraw = false;
     for (let i = 0; i < imgsY.length; i++) {
-      imgsY[i] += v;
-      if (imgsY[i] > 800) {
-        imgsY[i] -= imgH*imgsY.length;
-        skipDraw = true;
-      }
-      if (!skipDraw) {
-        p.image(drum0Imgs[i], greenLeftEdge + 50, imgsY[i], imgW, imgH);
-        p.image(drum1Imgs[i], greenLeftEdge + 190, imgsY[i], imgW, imgH);
-        p.image(drum2Imgs[i], greenLeftEdge + 330, imgsY[i], imgW, imgH);
+      for (let j = 0; j < 3; j++) {
+        imgsY[i][j] += v[j];
+        if (imgsY[i][j] > 800) {
+          imgsY[i][j] -= imgH*imgsY.length;
+          skipDraw = true;
+        }
+        if (drumStopBorderRange[0] <= imgsY[i][j] && imgsY[i][j] < drumStopBorderRange[1]) {
+          currentDrum[j] = i;
+        }
+        if (!skipDraw) {
+          p.image(drumImgs[i][j], greenLeftEdge + 50+(140*j), imgsY[i][j], imgW, imgH);
+        }
       }
     }
   }
@@ -168,6 +178,11 @@ const sketch = (p: p5) => {
     }
   }
 
+  const stopDrum = (n: number) => {
+    console.log(n);
+    console.log(drumsStr[n][currentDrum[0]]);
+    v[n] = 0;
+  }
 };
 
 new p5(sketch);
