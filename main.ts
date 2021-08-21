@@ -162,7 +162,7 @@ const sketch = (p: p5) => {
         if (drumStopBorderRange[0] <= imgsY[i][j] && imgsY[i][j] <= drumStopBorderRange[1]) {
           console.log(v[j]);
           if (v[j] == 1) {
-            if (Math.abs((drumStopBorderRange[0]+drumStopBorderRange[1])/2 - imgsY[i][j]) < 10) {
+            if (Math.abs((drumStopBorderRange[0]+drumStopBorderRange[1])/2 - imgsY[i][j]) < 3) {
               v[j] = 0;
               console.log("Stop");
             }
