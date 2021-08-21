@@ -57,13 +57,10 @@ const sketch = (p: p5) => {
   };
 
   const setupImages = () => {
-    console.log("Imgs");
-    console.log(Imgs);
     for (let i = 0; i < drumsStr[0].length; i++) {
       drumImgs.push([]);
       for (let j = 0; j < 3; j++) {
         drumImgs[i].push(p.loadImage(Imgs[drumsStr[j][i]]));
-        console.log(drumsStr[j][i]);
       }
     }
     for (let i = 0; i < imgsY.length; i++) {
@@ -71,6 +68,7 @@ const sketch = (p: p5) => {
         imgsY[i] = [imgH * i, imgH * i, imgH * i];
       }
     }
+    console.log(imgsY);
   }
 
   const drawButtons = () => {
@@ -147,6 +145,13 @@ const sketch = (p: p5) => {
 
   const drawDrum = () => {
     let skipDraw = false;
+    for (let i = 0; i < 3; i++) {
+      v[i] += a[i];
+      if (a[i] < 0 && v[i] < 5) {
+        v[i] = 5;
+        a[i] = 0;
+      }
+    }
     for (let i = 0; i < imgsY.length; i++) {
       for (let j = 0; j < 3; j++) {
         imgsY[i][j] += v[j];
@@ -154,8 +159,18 @@ const sketch = (p: p5) => {
           imgsY[i][j] -= imgH*imgsY.length;
           skipDraw = true;
         }
-        if (drumStopBorderRange[0] <= imgsY[i][j] && imgsY[i][j] < drumStopBorderRange[1]) {
-          currentDrum[j] = i;
+        if (drumStopBorderRange[0] <= imgsY[i][j] && imgsY[i][j] <= drumStopBorderRange[1]) {
+          console.log(v[j]);
+          if (v[j] == 1) {
+            if (Math.abs((drumStopBorderRange[0]+drumStopBorderRange[1])/2 - imgsY[i][j]) < 10) {
+              v[j] = 0;
+              console.log("Stop");
+            }
+          }
+          if (v[j] == 5) {
+            v[j] = 1;
+          }
+          // currentDrum[j] = i;
         }
         if (!skipDraw) {
           p.image(drumImgs[i][j], greenLeftEdge + 50+(140*j), imgsY[i][j], imgW, imgH);
@@ -181,7 +196,7 @@ const sketch = (p: p5) => {
   const stopDrum = (n: number) => {
     console.log(n);
     console.log(drumsStr[n][currentDrum[0]]);
-    v[n] = 0;
+    a[n] = -0.5;
   }
 };
 
