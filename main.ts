@@ -29,6 +29,9 @@ const sketch = (p: p5) => {
   const drumImgs: p5.Image[][] = []
   const drumStopBorderRange = [400+(300/2) - imgH, 400+(300/2)];
   const currentDrum: number[] = [0, 0, 0];
+
+  const topCirclesN: number = Math.floor(p.windowWidth / 75) - 2
+  const circlesMargin: number = (p.windowWidth - 80) / (topCirclesN - 1)
   let imgsY: number[][] = new Array(drumsStr[0].length);
   let v = [30, 30, 30];
   let a = [0, 0, 0];
@@ -122,13 +125,13 @@ const sketch = (p: p5) => {
 
     // top
     count -= 12;
-    for (let i = 0; i < 11; i++) {
+    for (let i = 0; i < topCirclesN; i++) {
       if (count == i) {
         bgLayer.fill(yellow);
       } else {
         bgLayer.fill(255, 255, 255);
       }
-      bgLayer.circle(40+75*i, 40, 40);
+      bgLayer.circle(40+circlesMargin*i, 40, 40);
     }
 
     // right
