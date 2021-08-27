@@ -30,8 +30,9 @@ const sketch = (p: p5) => {
   const drumStopBorderRange = [400+(300/2) - imgH, 400+(300/2)];
   const currentDrum: number[] = [0, 0, 0];
 
-  const topCirclesN: number = Math.floor(p.windowWidth / 75) - 2
+  const topCirclesN: number = Math.floor(p.windowWidth / 75) - 1
   const circlesMargin: number = (p.windowWidth - 80) / (topCirclesN - 1)
+  const verticalCirclesN: number = Math.floor(p.windowHeight / circlesMargin) - 1
   let imgsY: number[][] = new Array(drumsStr[0].length);
   let v = [30, 30, 30];
   let a = [0, 0, 0];
@@ -112,19 +113,19 @@ const sketch = (p: p5) => {
 
   const drawCircles = () => {
     bgLayer.noStroke();
-    let count = Math.round(p.frameCount / 9) % 34;
+    let count = Math.round(p.frameCount / 9) % (2 * verticalCirclesN + topCirclesN);
     // left
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < verticalCirclesN; i++) {
       if (count == i) {
         bgLayer.fill(yellow);
       } else {
         bgLayer.fill(255, 255, 255);
       }
-      bgLayer.circle(40, 40+75*(12 - i), 40);
+      bgLayer.circle(40, 40+circlesMargin*(verticalCirclesN - i), 40);
     }
 
     // top
-    count -= 12;
+    count -= verticalCirclesN;
     for (let i = 0; i < topCirclesN; i++) {
       if (count == i) {
         bgLayer.fill(yellow);
@@ -135,14 +136,14 @@ const sketch = (p: p5) => {
     }
 
     // right
-    count -= 11;
-    for (let i = 0; i < 12; i++) {
+    count -= topCirclesN;
+    for (let i = 0; i < verticalCirclesN; i++) {
       if (count == i) {
         bgLayer.fill(yellow);
       } else {
         bgLayer.fill(255, 255, 255);
       }
-      bgLayer.circle(40+75*10, 40+75+75*i, 40);
+      bgLayer.circle(40+(circlesMargin*(topCirclesN - 1)), 40+(circlesMargin * (i + 1)), 40);
     }
   };
 
