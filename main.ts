@@ -30,13 +30,14 @@ const sketch = (p: p5) => {
   ]
   const drumImgs: p5.Image[][] = []
   const drumStopBorderRange = [400+(300/2) - imgH, 400+(300/2)];
-  const currentDrum: number[] = [0, 0, 0];
+  const stoppedDrumsIndex = [-1, -1, -1];
+  let pointScale: number = 1;
 
   const topCirclesN: number = Math.floor(drawWidth / 75) - 1
   const circlesMargin: number = (drawWidth - 80) / (topCirclesN - 1)
   const verticalCirclesN: number = Math.floor(p.windowHeight / circlesMargin) - 1
   let imgsY: number[][] = new Array(drumsStr[0].length);
-  let v = [30, 30, 30];
+  let v = [3, 3, 3];
   let a = [0, 0, 0];
   p.setup = () => {
     setupImages();
@@ -121,6 +122,7 @@ const sketch = (p: p5) => {
     inp.size(150);
     inp.parent("canvas");
     inp.style('font-size', '50px');
+    inp.style('type', 'number');
   }
 
   const drawCircles = () => {
@@ -174,11 +176,15 @@ const sketch = (p: p5) => {
           imgsY[i][j] -= imgH*imgsY.length;
         }
         if (drumStopBorderRange[0] <= imgsY[i][j] && imgsY[i][j] <= drumStopBorderRange[1]) {
-          console.log(v[j]);
           if (v[j] == 1) {
             if (Math.abs((drumStopBorderRange[0]+drumStopBorderRange[1])/2 - imgsY[i][j]) < 3) {
               v[j] = 0;
+              stoppedDrumsIndex[j] = i;
+              console.log(stoppedDrumsIndex[j]);
               console.log("Stop");
+              if (j == 2) {
+                calcPoint();
+              }
             }
           }
           if (v[j] == 5) {
@@ -193,8 +199,8 @@ const sketch = (p: p5) => {
 
   const drawResultText = () => {
     p.textSize(50);
-    p.text("枚×100倍", greenLeftEdge + 200, p.windowHeight - 200);
-    p.text("=10000枚", greenLeftEdge + 200, p.windowHeight - 100);
+    p.text(`枚×${pointScale}倍`, greenLeftEdge + 200, p.windowHeight - 200);
+    p.text(`=${Number(inp.value()) * pointScale}枚`, greenLeftEdge + 200, p.windowHeight - 100);
   }
 
   const toNum = (arg: any, d: number):number => {
@@ -209,6 +215,23 @@ const sketch = (p: p5) => {
     currentPressedButton += 1;
     if (currentPressedButton > 2) return;
     a[currentPressedButton] = -0.5;
+  }
+
+  const calcPoint = () => {
+    console.log(drumsStr[0][stoppedDrumsIndex[0]]);
+    console.log(drumsStr[1][stoppedDrumsIndex[1]]);
+    console.log(drumsStr[2][stoppedDrumsIndex[2]]);
+    if (drumsStr[0][stoppedDrumsIndex[0]] == "bomb" || drumsStr[1][stoppedDrumsIndex[1]] == "bomb" || drumsStr[2][stoppedDrumsIndex[2]] == "bomb") {
+      pointScale = -1;
+    }
+    else if (drumsStr[0][stoppedDrumsIndex[0]] == "seven" && drumsStr[1][stoppedDrumsIndex[1]] == "seven" && drumsStr[2][stoppedDrumsIndex[2]] == "seven") {
+      pointScale = 10;
+    }
+    else if (drumsStr[0][stoppedDrumsIndex[0]] == drumsStr[1][stoppedDrumsIndex[1]] && drumsStr[1][stoppedDrumsIndex[1]] == drumsStr[2][stoppedDrumsIndex[2]]) {
+      pointScale = 3;
+    } else {
+      pointScale = 1;
+    }
   }
 };
 
