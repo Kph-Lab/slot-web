@@ -68,6 +68,9 @@ const sketch = (p: p5) => {
     if (p.key == ' ') {
       stopDrum();
     }
+    if (p.key == 'r') {
+      init();
+    }
     if (p.keyCode == p.ENTER) {
       inp.elt.blur();
     }
@@ -234,6 +237,15 @@ const sketch = (p: p5) => {
       pointScale = 3;
     } else {
       pointScale = 1;
+    }
+  }
+
+  const init = () => {
+    if (v[2] == 0) {
+      a = [0, 0, 0];
+      v = [30, 30, 30];
+      pointScale = 1;
+      currentPressedButton = -1;
     }
   }
 };
