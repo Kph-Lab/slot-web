@@ -37,7 +37,7 @@ const sketch = (p: p5) => {
   const circlesMargin: number = (drawWidth - 80) / (topCirclesN - 1)
   const verticalCirclesN: number = Math.floor(p.windowHeight / circlesMargin) - 1
   let imgsY: number[][] = new Array(drumsStr[0].length);
-  let v = [3, 3, 3];
+  let v = [30, 30, 30];
   let a = [0, 0, 0];
   p.setup = () => {
     setupImages();
