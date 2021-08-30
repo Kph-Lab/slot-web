@@ -58,8 +58,8 @@ const sketch = (p: p5) => {
     drawDrum();
     drawBackground();
     drawCircles();
-    bgLayer.textSize(20);
-    bgLayer.text(p.frameRate(), 100, 100);
+    // bgLayer.textSize(20);
+    // bgLayer.text(p.frameRate(), 100, 100);
     p.image(bgLayer, 0, 0);
     drawResultText();
   };
