@@ -6,6 +6,7 @@ const sketch = (p: p5) => {
   const drawWidth = p.windowWidth / 2;
   let inp: p5.Element;
   let stopButtons: p5.Element[] = [];
+  let currentPressedButton = -1;
   let bgLayer: p5.Graphics;
   const imgW = 100;
   const imgH = 141;
@@ -78,14 +79,15 @@ const sketch = (p: p5) => {
   }
 
   const drawButtons = () => {
-    for (let i = 0; i < 3; i++) {
-      stopButtons.push(p.createButton("Stop"))
-      stopButtons[i].position(greenLeftEdge + 50 + (135 * i), 750)
-      stopButtons[i].size(135, 70);
-      stopButtons[i].mousePressed(function() {
-        stopDrum(i)
-      });
-      stopButtons[i].parent("canvas")
+    for (let i = 1; i < 2; i++) {
+      stopButtons.push(p.createButton("STOP"))
+      stopButtons[i-1].position(greenLeftEdge + 50 + (135 * i), 750)
+      stopButtons[i-1].size(135, 70);
+      stopButtons[i-1].style('border-radius', '50%');
+      stopButtons[i-1].style('background-color', '#efff3c');
+      stopButtons[i-1].style('font-size', '40px');
+      stopButtons[i-1].mousePressed(stopDrum);
+      stopButtons[i-1].parent("canvas")
     }
   }
 
@@ -152,7 +154,6 @@ const sketch = (p: p5) => {
   };
 
   const drawDrum = () => {
-    let skipDraw = false;
     for (let i = 0; i < 3; i++) {
       v[i] += a[i];
       if (a[i] < 0 && v[i] < 5) {
@@ -165,7 +166,6 @@ const sketch = (p: p5) => {
         imgsY[i][j] += v[j];
         if (imgsY[i][j] > 800) {
           imgsY[i][j] -= imgH*imgsY.length;
-          skipDraw = true;
         }
         if (drumStopBorderRange[0] <= imgsY[i][j] && imgsY[i][j] <= drumStopBorderRange[1]) {
           console.log(v[j]);
@@ -180,9 +180,7 @@ const sketch = (p: p5) => {
           }
           // currentDrum[j] = i;
         }
-        if (!skipDraw) {
-          p.image(drumImgs[i][j], greenLeftEdge + 50+(140*j), imgsY[i][j], imgW, imgH);
-        }
+        p.image(drumImgs[i][j], greenLeftEdge + 50+(140*j), imgsY[i][j], imgW, imgH);
       }
     }
   }
@@ -201,10 +199,10 @@ const sketch = (p: p5) => {
     }
   }
 
-  const stopDrum = (n: number) => {
-    console.log(n);
-    console.log(drumsStr[n][currentDrum[0]]);
-    a[n] = -0.5;
+  const stopDrum = () => {
+    currentPressedButton += 1;
+    if (currentPressedButton > 2) return;
+    a[currentPressedButton] = -0.5;
   }
 };
 
