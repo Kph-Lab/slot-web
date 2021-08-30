@@ -68,6 +68,9 @@ const sketch = (p: p5) => {
     if (p.key == ' ') {
       stopDrum();
     }
+    if (p.keyCode == p.ENTER) {
+      inp.elt.blur();
+    }
   }
 
   const setupImages = () => {
