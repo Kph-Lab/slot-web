@@ -3,6 +3,7 @@ import p5 from "p5";
 import Imgs from "./assets/images/*.png";
 
 const sketch = (p: p5) => {
+  const drawWidth = p.windowWidth / 2;
   let inp: p5.Element;
   let stopButtons: p5.Element[] = [];
   let bgLayer: p5.Graphics;
@@ -16,7 +17,7 @@ const sketch = (p: p5) => {
   const redRectMergin = 80;
   const radius = 250;
   const diameter = radius * 2;
-  const centerX = p.windowWidth / 2;
+  const centerX = drawWidth / 2;
   const greenLeftEdge = centerX - radius;
   const greenRightEdge = centerX + radius;
   const greenBorderY = 500;
@@ -30,8 +31,8 @@ const sketch = (p: p5) => {
   const drumStopBorderRange = [400+(300/2) - imgH, 400+(300/2)];
   const currentDrum: number[] = [0, 0, 0];
 
-  const topCirclesN: number = Math.floor(p.windowWidth / 75) - 1
-  const circlesMargin: number = (p.windowWidth - 80) / (topCirclesN - 1)
+  const topCirclesN: number = Math.floor(drawWidth / 75) - 1
+  const circlesMargin: number = (drawWidth - 80) / (topCirclesN - 1)
   const verticalCirclesN: number = Math.floor(p.windowHeight / circlesMargin) - 1
   let imgsY: number[][] = new Array(drumsStr[0].length);
   let v = [30, 30, 30];
@@ -40,9 +41,10 @@ const sketch = (p: p5) => {
     setupImages();
     p.frameRate(60);
     // iPad width: 834 height: 1112
-    p.createCanvas(p.windowWidth, p.windowHeight);
+    let canvas = p.createCanvas(drawWidth, p.windowHeight);
+    canvas.parent("canvas");
     p.background(white);
-    bgLayer = p.createGraphics(p.windowWidth, p.windowHeight);
+    bgLayer = p.createGraphics(drawWidth, p.windowHeight);
     drawInputs();
     drawButtons();
   };
@@ -83,12 +85,13 @@ const sketch = (p: p5) => {
       stopButtons[i].mousePressed(function() {
         stopDrum(i)
       });
+      stopButtons[i].parent("canvas")
     }
   }
 
   const drawBackground = () => {
     bgLayer.fill(red);
-    bgLayer.rect(redRectMergin, redRectMergin, p.windowWidth-(redRectMergin*2), p.windowHeight-redRectMergin);
+    bgLayer.rect(redRectMergin, redRectMergin, drawWidth-(redRectMergin*2), p.windowHeight-redRectMergin);
     bgLayer.fill(green);
     bgLayer.stroke(0);
     bgLayer.strokeWeight(strokeWeight);
@@ -108,6 +111,7 @@ const sketch = (p: p5) => {
     inp = p.createInput();
     inp.position(greenLeftEdge + 20, p.windowHeight - 250);
     inp.size(150);
+    inp.parent("canvas");
     inp.style('font-size', '50px');
   }
 

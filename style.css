@@ -1,8 +1,21 @@
 body {
   padding: 0px;
   margin: 0px;
+  /* div#canvasの中央寄せ */
+  text-align: center;
+  /* アニメーションの高速化 */
+  transform: translateZ(0);
+  background-image: url('./assets/images/background.png');
 }
 
 html, body {
+  /* スクロールバーの非表示 */
   overflow: hidden;
+}
+
+div#canvas {
+  /* 子要素の幅に親要素の幅を合わせる */
+  display: inline-block;
+  /* div#canvas以下のp5.jsによって描画されたbuttonやinputを、親要素からの相対座標にする。(親要素にrelativeやfixedが指定されると子要素のabsoluteが親要素からの相対座標になる) */
+  position: relative;
 }
