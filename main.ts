@@ -63,6 +63,12 @@ const sketch = (p: p5) => {
     drawResultText();
   };
 
+  p.keyPressed = () => {
+    if (p.key == ' ') {
+      stopDrum();
+    }
+  }
+
   const setupImages = () => {
     for (let i = 0; i < drumsStr[0].length; i++) {
       drumImgs.push([]);
