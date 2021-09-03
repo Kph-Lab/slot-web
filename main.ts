@@ -39,6 +39,9 @@ const sketch = (p: p5) => {
   let imgsY: number[][] = new Array(drumsStr[0].length);
   let v = [30, 30, 30];
   let a = [0, 0, 0];
+
+  const gradientWhite = p.color(255, 255, 255, 0);
+  const gradientBlack = p.color(0, 0, 0, 180);
   p.setup = () => {
     setupImages();
     p.frameRate(60);
@@ -56,6 +59,7 @@ const sketch = (p: p5) => {
     bgLayer.background(0);
     // drawInputs();
     drawDrum();
+    drawGradient();
     drawBackground();
     drawCircles();
     // bgLayer.textSize(20);
@@ -117,6 +121,7 @@ const sketch = (p: p5) => {
     bgLayer.strokeWeight(strokeWeight);
     bgLayer.line(greenLeftEdge, greenBorderY, greenLeftEdge, p.windowHeight);
     bgLayer.line(greenRightEdge, greenBorderY, greenRightEdge, p.windowHeight);
+    bgLayer.noStroke();
     bgLayer.erase();
     bgLayer.rect(greenLeftEdge + 50, 400, diameter - 100, 300);
     bgLayer.noErase();
@@ -201,6 +206,21 @@ const sketch = (p: p5) => {
         p.image(drumImgs[i][j], greenLeftEdge + 50+(140*j), imgsY[i][j], imgW, imgH);
       }
     }
+  }
+
+  const drawGradient = () => {
+    let gradient0 = p.drawingContext.createLinearGradient(p.windowWidth / 2, 400, p.windowWidth / 2, 550);
+    let gradient1 = p.drawingContext.createLinearGradient(p.windowWidth / 2, 550, p.windowWidth / 2, 700);
+    gradient0.addColorStop(0, gradientBlack);
+    gradient0.addColorStop(1, gradientWhite);
+    gradient1.addColorStop(1, gradientBlack);
+    gradient1.addColorStop(0, gradientWhite);
+
+    p.noStroke();
+    p.drawingContext.fillStyle = gradient0;
+    p.rect(greenLeftEdge + 50, 400, diameter - 100, 150);
+    p.drawingContext.fillStyle = gradient1;
+    p.rect(greenLeftEdge + 50, 550, diameter - 100, 150);
   }
 
   const drawResultText = () => {
