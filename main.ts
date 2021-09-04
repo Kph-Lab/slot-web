@@ -10,9 +10,12 @@ const sketch = (p: p5) => {
   let bgLayer: p5.Graphics;
   const imgW = 100;
   const imgH = 141;
-  const yellow = p.color("#f2d15b");
+  // const yellow = p.color("#f2d15b");
+  // const yellow = p.color("#efff3c");
+  const yellow = p.color(253, 242, 76);
   const red = p.color("#b30401");
   const white = p.color("#ffffff");
+  const lightGray = p.color(200, 200, 200);
   const green = p.color("#036c0d");
 
   const redRectMergin = 80;
@@ -144,7 +147,7 @@ const sketch = (p: p5) => {
       if (count == i) {
         bgLayer.fill(yellow);
       } else {
-        bgLayer.fill(255, 255, 255);
+        bgLayer.fill(lightGray);
       }
       bgLayer.circle(40, 40+circlesMargin*(verticalCirclesN - i), 40);
     }
@@ -155,7 +158,7 @@ const sketch = (p: p5) => {
       if (count == i) {
         bgLayer.fill(yellow);
       } else {
-        bgLayer.fill(255, 255, 255);
+        bgLayer.fill(lightGray);
       }
       bgLayer.circle(40+circlesMargin*i, 40, 40);
     }
@@ -166,7 +169,7 @@ const sketch = (p: p5) => {
       if (count == i) {
         bgLayer.fill(yellow);
       } else {
-        bgLayer.fill(255, 255, 255);
+        bgLayer.fill(lightGray);
       }
       bgLayer.circle(40+(circlesMargin*(topCirclesN - 1)), 40+(circlesMargin * (i + 1)), 40);
     }
