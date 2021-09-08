@@ -153,10 +153,10 @@ const sketch = (p: p5) => {
     for (let i = 0; i < verticalCirclesN; i++) {
       if (count == i) {
         // bgLayer.fill(yellow);
-        bgLayer.image(lightCircle, 20, 20+circlesMargin*(verticalCirclesN - i), 40, 40);
+        bgLayer.image(lightCircle, 0, 0+circlesMargin*(verticalCirclesN - i), 80, 80);
       } else {
         // bgLayer.fill(lightGray);
-        bgLayer.image(darkCircle, 20, 20+circlesMargin*(verticalCirclesN - i), 40, 40);
+        bgLayer.image(darkCircle, 0, 0+circlesMargin*(verticalCirclesN - i), 80, 80);
       }
       // bgLayer.circle(40, 40+circlesMargin*(verticalCirclesN - i), 40);
     }
@@ -166,10 +166,10 @@ const sketch = (p: p5) => {
     for (let i = 0; i < topCirclesN; i++) {
       if (count == i) {
         // bgLayer.fill(yellow);
-        bgLayer.image(lightCircle, 20+circlesMargin*i, 20, 40, 40);
+        bgLayer.image(lightCircle, 0+circlesMargin*i, 0, 80, 80);
       } else {
         // bgLayer.fill(lightGray);
-        bgLayer.image(darkCircle, 20+circlesMargin*i, 20, 40, 40);
+        bgLayer.image(darkCircle, 0+circlesMargin*i, 0, 80, 80);
       }
       // bgLayer.circle(40+circlesMargin*i, 40, 40);
     }
@@ -179,10 +179,10 @@ const sketch = (p: p5) => {
     for (let i = 0; i < verticalCirclesN; i++) {
       if (count == i) {
         // bgLayer.fill(yellow);
-        bgLayer.image(lightCircle, 20+(circlesMargin*(topCirclesN - 1)), 20+(circlesMargin * (i+1)), 40, 40);
+        bgLayer.image(lightCircle, 0+(circlesMargin*(topCirclesN - 1)), 0+(circlesMargin * (i+1)), 80, 80);
       } else {
         // bgLayer.fill(lightGray);
-        bgLayer.image(darkCircle, 20+(circlesMargin*(topCirclesN - 1)), 20+(circlesMargin * (i+1)), 40, 40);
+        bgLayer.image(darkCircle, 0+(circlesMargin*(topCirclesN - 1)), 0+(circlesMargin * (i+1)), 80, 80);
       }
       // bgLayer.circle(40+(circlesMargin*(topCirclesN - 1)), 40+(circlesMargin * (i + 1)), 40);
     }
