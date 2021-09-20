@@ -1,6 +1,10 @@
 import p5 from "p5";
 //@ts-ignore
 import Imgs from "./assets/images/*.png";
+//@ts-ignore
+import LightCircleImg from "./assets/images/circles/lightCircle.png";
+//@ts-ignore
+import DarkCircleImg from "./assets/images/circles/darkCircle.png";
 
 const sketch = (p: p5) => {
   const drawWidth = p.windowWidth / 2;
@@ -39,6 +43,10 @@ const sketch = (p: p5) => {
   const topCirclesN: number = Math.floor(drawWidth / 75) - 1
   const circlesMargin: number = (drawWidth - 80) / (topCirclesN - 1)
   const verticalCirclesN: number = Math.floor(p.windowHeight / circlesMargin) - 1
+  const lightCircle = p.loadImage(LightCircleImg);
+  const darkCircle = p.loadImage(DarkCircleImg);
+  console.log(LightCircleImg);
+  console.log(DarkCircleImg);
   let imgsY: number[][] = new Array(drumsStr[0].length);
   let v = [30, 30, 30];
   let a = [0, 0, 0];
@@ -95,7 +103,6 @@ const sketch = (p: p5) => {
         imgsY[i] = [imgH * i, imgH * i, imgH * i];
       }
     }
-    console.log(imgsY);
   }
 
   const drawButtons = () => {
@@ -145,33 +152,39 @@ const sketch = (p: p5) => {
     // left
     for (let i = 0; i < verticalCirclesN; i++) {
       if (count == i) {
-        bgLayer.fill(yellow);
+        // bgLayer.fill(yellow);
+        bgLayer.image(lightCircle, 0, 0+circlesMargin*(verticalCirclesN - i), 80, 80);
       } else {
-        bgLayer.fill(lightGray);
+        // bgLayer.fill(lightGray);
+        bgLayer.image(darkCircle, 0, 0+circlesMargin*(verticalCirclesN - i), 80, 80);
       }
-      bgLayer.circle(40, 40+circlesMargin*(verticalCirclesN - i), 40);
+      // bgLayer.circle(40, 40+circlesMargin*(verticalCirclesN - i), 40);
     }
 
     // top
     count -= verticalCirclesN;
     for (let i = 0; i < topCirclesN; i++) {
       if (count == i) {
-        bgLayer.fill(yellow);
+        // bgLayer.fill(yellow);
+        bgLayer.image(lightCircle, 0+circlesMargin*i, 0, 80, 80);
       } else {
-        bgLayer.fill(lightGray);
+        // bgLayer.fill(lightGray);
+        bgLayer.image(darkCircle, 0+circlesMargin*i, 0, 80, 80);
       }
-      bgLayer.circle(40+circlesMargin*i, 40, 40);
+      // bgLayer.circle(40+circlesMargin*i, 40, 40);
     }
 
     // right
     count -= topCirclesN;
     for (let i = 0; i < verticalCirclesN; i++) {
       if (count == i) {
-        bgLayer.fill(yellow);
+        // bgLayer.fill(yellow);
+        bgLayer.image(lightCircle, 0+(circlesMargin*(topCirclesN - 1)), 0+(circlesMargin * (i+1)), 80, 80);
       } else {
-        bgLayer.fill(lightGray);
+        // bgLayer.fill(lightGray);
+        bgLayer.image(darkCircle, 0+(circlesMargin*(topCirclesN - 1)), 0+(circlesMargin * (i+1)), 80, 80);
       }
-      bgLayer.circle(40+(circlesMargin*(topCirclesN - 1)), 40+(circlesMargin * (i + 1)), 40);
+      // bgLayer.circle(40+(circlesMargin*(topCirclesN - 1)), 40+(circlesMargin * (i + 1)), 40);
     }
   };
 
