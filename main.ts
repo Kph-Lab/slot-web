@@ -5,12 +5,16 @@ import Imgs from "./assets/images/*.png";
 import LightCircleImg from "./assets/images/circles/lightCircle.png";
 //@ts-ignore
 import DarkCircleImg from "./assets/images/circles/darkCircle.png";
+//@ts-ignore
+import CoinAnime from "./assets/videos/*.*";
 
 const sketch = (p: p5) => {
   const drawWidth = p.windowWidth / 2;
   let inp: p5.Element;
   let stopButtons: p5.Element[] = [];
   let currentPressedButton = -1;
+  let vid: p5.MediaElement;
+  let CoinVideosPath: string[] = [];
   let bgLayer: p5.Graphics;
   const imgW = 100;
   const imgH = 141;
@@ -55,6 +59,7 @@ const sketch = (p: p5) => {
   const gradientBlack = p.color(0, 0, 0, 180);
   p.setup = () => {
     setupImages();
+    setupVideos();
     p.frameRate(60);
     // iPad width: 834 height: 1112
     let canvas = p.createCanvas(drawWidth, p.windowHeight);
@@ -103,6 +108,16 @@ const sketch = (p: p5) => {
         imgsY[i] = [imgH * i, imgH * i, imgH * i];
       }
     }
+  }
+
+  const setupVideos = () => {
+    for (let imageName in CoinAnime) {
+      for (let extensionName in CoinAnime[imageName]) {
+        const filePath = CoinAnime[imageName][extensionName]
+        CoinVideosPath.push(filePath);
+      }
+    }
+    console.log(CoinVideosPath);
   }
 
   const drawButtons = () => {
@@ -225,7 +240,9 @@ const sketch = (p: p5) => {
   }
 
   const drawGradient = () => {
+    // @ts-ignore
     let gradient0 = p.drawingContext.createLinearGradient(p.windowWidth / 2, 400, p.windowWidth / 2, 550);
+    // @ts-ignore
     let gradient1 = p.drawingContext.createLinearGradient(p.windowWidth / 2, 550, p.windowWidth / 2, 700);
     gradient0.addColorStop(0, gradientBlack);
     gradient0.addColorStop(1, gradientWhite);
@@ -233,8 +250,10 @@ const sketch = (p: p5) => {
     gradient1.addColorStop(0, gradientWhite);
 
     p.noStroke();
+    // @ts-ignore
     p.drawingContext.fillStyle = gradient0;
     p.rect(greenLeftEdge + 50, 400, diameter - 100, 150);
+    // @ts-ignore
     p.drawingContext.fillStyle = gradient1;
     p.rect(greenLeftEdge + 50, 550, diameter - 100, 150);
   }
@@ -282,8 +301,16 @@ const sketch = (p: p5) => {
       v = [30, 30, 30];
       pointScale = 1;
       currentPressedButton = -1;
+      drawCoinAnime();
     }
   }
+
+  const drawCoinAnime = () => {
+    let vid = p.createVideo(CoinVideosPath);
+    // vid.src = CoinAnime;
+    vid.position(0, 0);
+    vid.loop();
+  };
 };
 
 new p5(sketch);
