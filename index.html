@@ -2,12 +2,43 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>スロット</title>
-  <script src="main.ts"></script>
-  <link rel="stylesheet" href="style.css" media="all">
 </head>
 <body>
-  <div id="canvas"></div>
+  <div>
+    <img id="img" src="./assets/images/start-before.png">
+  </div>
+  <script src="./index.js"></script>
 </body>
+<style>
+html, body, div {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+div {
+  text-align: center;
+}
+img {
+  height: 100vh;
+}
+.before-press {
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: url(assets/images/start-before.png)
+  center / cover;
+}
+.after-press {
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: url(assets/images/start-after.png)
+  center / cover;
+}
+</style>
 </html>
