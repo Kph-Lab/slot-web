@@ -12,6 +12,6 @@
   "scripts": {
     "dev": "parcel index.html play.html --open",
     "build": "parcel build index.html play.html --public-url .",
-    "buildForCI": "parcel build index.html --public-url ."
+    "buildForCI": "parcel build index.html play.html --public-url ."
   }
 }
