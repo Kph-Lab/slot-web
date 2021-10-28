@@ -85,11 +85,13 @@ const sketch = (p: p5) => {
   };
 
   p.keyPressed = () => {
+    let k = p.key;
     if (p.key == ' ') {
-      stopDrum();
-    }
-    if (p.key == 'r') {
-      init();
+      if (v[2] == 0) {
+        init();
+      } else {
+        stopDrum();
+      }
     }
     if (p.keyCode == p.ENTER) {
       inp.elt.blur();
@@ -284,6 +286,7 @@ const sketch = (p: p5) => {
     console.log(drumsStr[2][stoppedDrumsIndex[2]]);
     if (drumsStr[0][stoppedDrumsIndex[0]] == "bomb" || drumsStr[1][stoppedDrumsIndex[1]] == "bomb" || drumsStr[2][stoppedDrumsIndex[2]] == "bomb") {
       pointScale = -1;
+      drawBombAnime();
     }
     else if (drumsStr[0][stoppedDrumsIndex[0]] == "seven" && drumsStr[1][stoppedDrumsIndex[1]] == "seven" && drumsStr[2][stoppedDrumsIndex[2]] == "seven") {
       pointScale = 10;
@@ -301,16 +304,27 @@ const sketch = (p: p5) => {
       v = [30, 30, 30];
       pointScale = 1;
       currentPressedButton = -1;
-      drawCoinAnime();
     }
   }
 
+  const removeVideo = (videoElement: p5.MediaElement) => {
+    console.log("Video Finished");
+    videoElement.remove();
+  }
+
   const drawCoinAnime = () => {
-    let vid = p.createVideo(CoinVideosPath);
+    let vid = p.createVideo(CoinAnime["coin-vp9"]["webm"]);
     // vid.src = CoinAnime;
     vid.position(0, 0);
-    vid.loop();
+    vid.onended(function() {removeVideo(vid)});
+    vid.play();
   };
+  const drawBombAnime = () => {
+    let vid = p.createVideo(CoinAnime["explosion"]["webm"]);
+    vid.position(0, 0);
+    vid.onended(function() {removeVideo(vid)});
+    vid.play();
+  }
 };
 
 new p5(sketch);
