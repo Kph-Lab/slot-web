@@ -16,6 +16,7 @@ const sketch = (p: p5) => {
   let vid: p5.MediaElement;
   let CoinVideosPath: string[] = [];
   let bgLayer: p5.Graphics;
+  let resetCounter = 0;
   const imgW = 100;
   const imgH = 141;
   // const yellow = p.color("#f2d15b");
@@ -89,6 +90,13 @@ const sketch = (p: p5) => {
     if (p.key == ' ') {
       if (v[2] == 0) {
         init();
+        inp.value(Number(inp.value()) * pointScale);
+        resetCounter++;
+        if (resetCounter >= 5) {
+          if(!alert(`${Number(inp.value()) * pointScale}点`)) {
+            window.location.href = "/index.html";
+          }
+        }
       } else {
         stopDrum();
       }
