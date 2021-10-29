@@ -310,7 +310,6 @@ const sketch = (p: p5) => {
     if (v[2] == 0) {
       a = [0, 0, 0];
       v = [30, 30, 30];
-      pointScale = 1;
       currentPressedButton = -1;
     }
   }
