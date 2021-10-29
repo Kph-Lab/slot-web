@@ -36,9 +36,9 @@ const sketch = (p: p5) => {
   const greenBorderY = 500;
   const strokeWeight = 5;
   const drumsStr: string[][] = [
-    ["bell", "cherry", "palm", "flag", "bomb", "ball", "seven", "ball", "bell", "seven", "bomb", "flag", "cherry", "palm", "palm", "seven", "bell", "ball", "cherry", "flag"],
-    ["cherry", "palm", "palm", "seven", "bell", "ball", "cherry", "flag", "bell", "cherry", "palm", "flag", "bomb", "ball", "seven", "ball", "bell", "seven", "bomb", "flag"],
-    ["ball", "cherry", "flag", "bell", "cherry", "palm", "flag", "bomb", "ball", "seven", "ball", "bell", "seven", "bomb", "flag", "cherry", "palm", "palm", "seven", "bell"]
+    ["bomb", "ball", "bomb", "ball", "seven", "cherry", "seven", "bell", "bell", "cherry"],
+    ["bomb", "seven", "ball", "bomb", "seven", "bell", "bell", "ball", "cherry", "ball", "bell", "cherry"],
+    ["bell", "seven", "cherry", "cherry", "bell", "bomb", "ball", "ball", "bell", "seven", "cherry", "bomb"]
   ]
   const drumImgs: p5.Image[][] = []
   const drumStopBorderRange = [400+(300/2) - imgH, 400+(300/2)];
