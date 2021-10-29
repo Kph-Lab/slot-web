@@ -293,7 +293,7 @@ const sketch = (p: p5) => {
     console.log(drumsStr[1][stoppedDrumsIndex[1]]);
     console.log(drumsStr[2][stoppedDrumsIndex[2]]);
     if (drumsStr[0][stoppedDrumsIndex[0]] == "bomb" || drumsStr[1][stoppedDrumsIndex[1]] == "bomb" || drumsStr[2][stoppedDrumsIndex[2]] == "bomb") {
-      pointScale = -1;
+      pointScale = 0;
       drawBombAnime();
     }
     else if (drumsStr[0][stoppedDrumsIndex[0]] == "seven" && drumsStr[1][stoppedDrumsIndex[1]] == "seven" && drumsStr[2][stoppedDrumsIndex[2]] == "seven") {
