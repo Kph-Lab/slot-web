@@ -53,7 +53,7 @@ const sketch = (p: p5) => {
   console.log(LightCircleImg);
   console.log(DarkCircleImg);
   let imgsY: number[][] = new Array(drumsStr[0].length);
-  let v = [30, 30, 30];
+  let v = [30, 24, 36];
   let a = [0, 0, 0];
 
   const gradientWhite = p.color(255, 255, 255, 0);
@@ -309,7 +309,7 @@ const sketch = (p: p5) => {
   const init = () => {
     if (v[2] == 0) {
       a = [0, 0, 0];
-      v = [30, 30, 30];
+      v = [30, 24, 36];
       currentPressedButton = -1;
     }
   }
